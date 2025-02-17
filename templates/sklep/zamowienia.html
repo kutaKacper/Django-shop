@@ -1,0 +1,21 @@
+<h1>dgrji</h1>
+
+                    {% for order in orders %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        <div class="card produkt-item border-0 mb-4">
+                            <div class="card-header produkt-img position-relative overflow-hidden bg-transparent border p-0">
+                                <a href="{{ produkt.get_url }}"><img class="img-fluid w-100" src="{{ produkt.photo.url }}" alt=""></a>
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <a href="{{ produkt.get_url }}"><h6 class="text-truncate mb-3">{{ produkt.produkt_name }}</h6></a>
+                                <div class="d-flex justify-content-center">
+                                    <h6>{{ order.total }} zł</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="{{ produkt.get_url }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Szczegóły</a>
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Dodaj do koszyka</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}

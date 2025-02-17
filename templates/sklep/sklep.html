@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px; position: relative;">
+                    <h4 class="m-0 text-white">Kategorie</h6>
+                    <i class="fa fa-angle-down text-light"></i>
+                </a>
+                <nav class="navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical" style="position: absolute; z-index: 1000;">
+                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                        <a href="{% url 'sklep' %}" class="nav-item nav-link"><b>Wszystkie</b></a>
+                        {% for kategoria in links %}
+                        <a href="{{ kategoria.get_url }}" class="nav-item nav-link">{{ kategoria.kategoria_name }}</a>
+                        {% endfor %}
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold">CMP - Sklep internetowy</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="{% url 'home' %}" class="nav-item nav-link active">Strona główna</a>
+                            <a href="{% url 'sklep' %}" class="nav-item nav-link">Sklep</a>
+                            <a href="{% url 'koszyk' %}" class="nav-item nav-link">Koszyk</a>
+                            <a href="{% url 'home' %}" class="nav-item nav-link">O nas</a>
+                            <a href="{% url 'home' %}" class="nav-item nav-link">Kontakt</a>
+                        </div>
+                        <div class="navbar-nav ml-auto py-0 d-flex align-items-center">
+                            {% if user.is_authenticated %}
+                            <h5 class="mb-0 mr-3">Witaj, {{user.first_name}}</h5>
+                            <h5 class="mb-0 mr-3"><a href="{% url 'logout' %}" class="nav-item nav-link">Wyloguj się</a></h5>
+                            <h5 class="mb-0 mr-3"><a href="{% url 'moje_konto' %}" class="nav-item nav-link"><b>Moje konto</a></b> </h5>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="nav-item nav-link">Logowanie</a>
+                            <a href="{% url 'register' %}" class="nav-item nav-link">Zarejestruj się</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-12">
+                <!-- Price Start -->
+                <!--
+                <div class="border-bottom mb-4 pb-4">
+                    <h5 class="font-weight-semi-bold mb-4">Filtruj według ceny</h5>
+                    <form>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" checked id="price-all">
+                            <label class="custom-control-label" for="price-all">Dowolna</label>
+                            <span class="badge border font-weight-normal">1000</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-1">
+                            <label class="custom-control-label" for="price-1">0 - 200 zł</label>
+                            <span class="badge border font-weight-normal">150</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-2">
+                            <label class="custom-control-label" for="price-2">200 - 400 zł</label>
+                            <span class="badge border font-weight-normal">4</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-3">
+                            <label class="custom-control-label" for="price-3">400 - 800 zł</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-4">
+                            <label class="custom-control-label" for="price-4">800 - 1500 zł</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="price-5">
+                            <label class="custom-control-label" for="price-5">1500 - 3000 zł</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div>
+                    </form>
+                </div>
+                -->
+            </div>
+            <!-- Shop Sidebar End -->
+
+
+            <!-- Shop Produkt Start -->
+            <div class="col-lg-9 col-md-12">
+                <div class="row pb-3">
+                    <div class="col-12 pb-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <header class="border-bottom mb-4 pb-3">
+                                <div class="text-left">
+                                    {% if produkt_count > 1 and produkt_count < 5 %}
+                                    <span class="mr-md-auto">{{ produkt_count }} wyniki </span>
+                                    {% elif produkt_count == 1 %}
+                                    <span class="mr-md-auto">{{ produkt_count }} wynik </span>
+                                    {% else %}
+                                    <span class="mr-md-auto">{{ produkt_count }} wyników </span>
+                                    {% endif %}
+                                </div>
+                        </header>
+                    <!--    <div class="dropdown ml-4">
+                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                            Sortuj
+                                        </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" href="#">Ostatnie</a>
+                                    <a class="dropdown-item" href="#">Popularność</a>
+                                </div>
+                            </div>
+                    -->
+                        </div>
+                    </div>
+
+                    {% for produkt in produkty %}
+                    {% if produkt.stock == 0 %}
+                    {% else %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        <div class="card produkt-item border-0 mb-4">
+                            <div class="card-header produkt-img position-relative overflow-hidden bg-transparent border p-0">
+                                <a href="{{ produkt.get_url }}"><img class="img-fluid w-100" src="{{ produkt.photo.url }}" alt=""></a>
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <a href="{{ produkt.get_url }}"><h6 class="text-truncate mb-3">{{ produkt.produkt_name }}</h6></a>
+                                <div class="d-flex justify-content-center">
+                                    <h6>{{ produkt.price }} zł</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="{{ produkt.get_url }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Szczegóły</a>
+                                <a href="{% url 'add_koszyk' produkt.id %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Dodaj do koszyka</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    <div class="col-12 pb-1">
+                        <nav aria-label="Page navigation">
+                            
+                        {% if produkty.has_other_pages %}
+                            <ul class="pagination justify-content-center mb-3">
+                            {% if produkty.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ produkty.previous_page_number }}">Previous</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="">Poprzednia</a></li>
+                            {% endif %}
+                            
+                            {% for i in produkty.paginator.page_range %}
+                                {% if produkty.number == i %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            
+                            {% endfor %}
+
+                            {% if produkty.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{produkty.next_page_number}}">Następna</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Shop Produkt End -->
+        </div>
+    </div>
+    <!-- Shop End -->
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+</body>
+
+</html>
+{% endblock %}

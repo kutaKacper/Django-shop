@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="container-fluid">
+    <div class="row bg-secondary py-2 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-dark" href="">FAQs</a>
+                <span class="text-muted px-2">|</span>
+                <a class="text-dark" href="">O nas</a>
+                <span class="text-muted px-2">|</span>
+                <a class="text-dark" href="">Kontakt</a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="text-dark pl-2" href="">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block text-center">
+            <a href="{% url 'home' %}" class="brand-wrap">
+                <img class="logo" src="{% static './img/logo.jpg' %}" width=200>
+            </a> <!-- brand-wrap.// -->
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+            <form action="{% url 'search' %}" class="search" method="GET">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="Szukaj" name="keyword">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-transparent text-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right">
+            <a href="{% url 'koszyk' %}" class="btn border btn-lg">
+                <i class="fas fa-shopping-cart text-primary fa-lg"></i>
+                <span class="badge">{{ koszyk_items.count }}</span>
+            </a>
+        </div>
+        
+    </div>
+</div>
+<!-- Topbar End -->
